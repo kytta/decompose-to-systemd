@@ -36,6 +36,9 @@ classifiers = [
 dependencies = [
 ]
 
+[project.scripts]
+decompose-to-systemd = "decompose_to_systemd.__main__:_main"
+
 [project.urls]
 Repository = "https://github.com/kytta/decompose-to-systemd/"
 "Bug tracker" = "https://github.com/kytta/decompose-to-systemd/issues"
