@@ -34,6 +34,8 @@ classifiers = [
     "Typing :: Typed"
 ]
 dependencies = [
+    "podman-compose",
+    "Jinja2",
 ]
 
 [project.scripts]

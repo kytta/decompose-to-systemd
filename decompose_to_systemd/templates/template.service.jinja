@@ -1,0 +1,22 @@
+[Unit]
+Description={{ project_name }}: {{ service_name }}
+After=network-online.target
+Wants=network-online.target
+StartLimitBurst=2
+StartLimitInterval=11
+
+[Service]
+ExecStartPre=-{{ frontend_path }} kill {{ container_name }}
+ExecStartPre=-{{ frontend_path }} rm {{ container_name }}
+{% if image %}ExecStartPre={{ frontend_path }} pull {{ image }}{% endif %}
+
+ExecStart={{ frontend_path }} run \
+{%- for arg in args %}
+          {{ arg }} \
+{%- endfor %}
+ExecStop={{ frontend_path }} stop -t 10 {{ container_name }}
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

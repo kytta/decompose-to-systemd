@@ -5,13 +5,15 @@
 from collections.abc import Sequence
 
 from decompose_to_systemd.cli import _get_parser
+from decompose_to_systemd.convert import convert
 
 
 def _main(argv: Sequence[str] | None = None) -> None:
     parser = _get_parser()
     args = parser.parse_args(argv)
 
-    print(args)  # noqa: T201
+    for file in args.files:
+        convert(file, args.frontend)
 
 
 if __name__ == "__main__":
